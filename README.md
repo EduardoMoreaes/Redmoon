@@ -3,5 +3,5 @@
 ## iniciando instalando as dependências express e nodemon
 ~~~
      npm install express
-     npm install nodemon --save-dev
+     npm install nodemon --save-de
 ~~~
