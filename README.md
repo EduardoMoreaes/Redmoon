@@ -7,3 +7,5 @@ Nodemon para ficar atualizando sempre que houver alteração no código, o expre
      npm install express
      npm install nodemon --save-dev
 ~~~
+
+Para o front-end vai ser utilizado o 
