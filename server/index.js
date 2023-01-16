@@ -1,10 +1,13 @@
 const express = require("express");
 const app = express();
+const router = require('../routes/router')
+const path = require("path");
 
+app.use(express.static(path.join(__dirname, "../src/pages/home/public")));
 
 app.get("/", (req, res) => {
-    res.send('../views/index.html')
-})
+    res.send(router)
+});
 
 
 app.listen(8080, () =>   {
