@@ -103,6 +103,7 @@ dist
 # TernJS port file
 .tern-port
 
-.server
-.Documents
-.test
+server
+Documents
+test
+src/models
