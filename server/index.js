@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const router = require('../routes/router')
 const path = require("path");
+const dataBase = require('../src/models/firebase');
 
 app.use(express.static(path.join(__dirname, "../src/pages/home/public")));
 

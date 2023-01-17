@@ -21,3 +21,8 @@ são geradas pelo Svelte e convertidas para que o node possa usá-las.
      npm install path
      npm devit sveltejs/template -nome-da-página-
 ~~~
+
+Para o banco de dados e autenticação de usuário, usaremos a API do google Firebase.
+~~~
+     npm install firebase
+~~~
