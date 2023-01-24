@@ -26,3 +26,9 @@ Para o banco de dados e autenticação de usuário, usaremos a API do google Fir
 ~~~
      npm install firebase
 ~~~
+
+Nossa aplicação fará uso de cookies através do Svelte, então
+instalaremos o pacote "js-cookies"
+~~~
+     npm install js-cookies
+~~~
