@@ -2,11 +2,10 @@
 	import Cookies  from "js-cookie";
 	export let user;
 
-
 </script>
 
 <main>
-		<canvas id="cnv" class="given" width="500" height="500"></canvas>
+		<canvas id="cnv" class="given" width="1000" height="700"></canvas>
 </main>
 
 <style>
