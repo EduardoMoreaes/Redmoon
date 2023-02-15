@@ -492,7 +492,7 @@ var app = (function () {
     			attr_dev(canvas, "width", "1000");
     			attr_dev(canvas, "height", "700");
     			add_location(canvas, file, 7, 2, 83);
-    			attr_dev(main, "class", "svelte-1tp4821");
+    			attr_dev(main, "class", "svelte-jopgbd");
     			add_location(main, file, 6, 0, 74);
     		},
     		l: function claim(nodes) {

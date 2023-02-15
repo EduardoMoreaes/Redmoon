@@ -93,7 +93,7 @@ function main(){
                 templateSelector();
             }
         }
-        cubeRotation = 2;
+        cubeRotation = 0;
     }
     if (run === true) {
         requestAnimationFrame(render);

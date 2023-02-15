@@ -15,7 +15,6 @@
 		margin: 0;
 		width: 100%;
 		height: 100%;
-		background-image: linear-gradient(to top, black, green);
 	}
 
 	@media (min-width: 640px) {
