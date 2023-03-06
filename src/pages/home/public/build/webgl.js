@@ -7,6 +7,7 @@ var run = false;
 main()
 
 
+window.addEventListener("mouseup", givenUp);
 window.addEventListener("keydown", givenUp);
 
 function givenUp(e) {
@@ -78,7 +79,7 @@ function main(){
     
 
     function render(now) {
-        now *= 0.01;
+        now *= 0.025;
         deltaTime = now - then;
         then = now;
         
@@ -90,10 +91,10 @@ function main(){
             requestAnimationFrame(render);
             
             if(i == 100){
-                templateSelector();
+
+                templateSelector(programInfo, vsSource, fsSource);
             }
         }
-        cubeRotation = 0;
     }
     if (run === true) {
         requestAnimationFrame(render);
@@ -139,69 +140,50 @@ function loadShader(gl, type, source) {
         gl.deleteShader(shader);
         return null;
     }
-
+    
     return shader;
 }
 
-function templateSelector() {
-    cubeRotation = Math.floor(cubeRotation%10);
-    var colorFace = "";
+function templateSelector(programInfo, vsSource, fsSource) {
+    const canvas = document.getElementById("cnv");
+    const gl = canvas.getContext("webgl");
+    const shaderProgram = initShaderProgram(gl, vsSource, fsSource);
 
-    switch (cubeRotation) {
-        case 0:
-            colorFace = ("white");
-        
-        break;
+    // Obtém a matriz de modelo-visão-projeção (model-view-projection matrix)
+    const u_MvpMatrix = gl.getUniformLocation(shaderProgram, "uProjectionMatrix");
+    const mvpMatrix = new Float32Array(16);
+    gl.getUniform(shaderProgram, u_MvpMatrix).forEach(function(value, index) {
+        mvpMatrix[index] = value;
+    });
 
-        case 1:
-            colorFace = ("white");
-
-        break;
-
-        case 2:
-            colorFace = ("pink");
-    
-        break;
-
-        case 3:
-            colorFace = ("pink");
-
-        break;
-        
-        case 4:
-            colorFace = ("blue");
-        
-        break;
-        
-        case 5:
-            colorFace = ("blue");
-        
-        break;
-        
-        case 6:
-            colorFace = ("yellow");
-        
-        break;
-
-        case 7:
-            colorFace = ("yellow");
-        
-        break;
-
-        case 8:
-            colorFace = ("yellow");
-        
-        break;
-
-        case 9:
-            colorFace = ("red");
-        
-        break;
-        default:
-        break;
+    // Calcula a matriz inversa da matriz de modelo-visão-projeção
+    // É necessário importar ou implementar a classe Matrix4 com o método inverse
+    var inverseMvpMatrix = new Float32Array(16);
+    if (!Matrix4.inverse(mvpMatrix, inverseMvpMatrix)) {
+        console.log('Não foi possível calcular a matriz inversa.');
+        return;
     }
-    
+
+    // Calcula o vetor normal da face em questão
+    // É necessário importar ou implementar a classe Vector3 com o método transformDirection
+    var normal = new Vector3([0.0, 0.0, 1.0]); // Exemplo: face frontal
+    normal.transformDirection(inverseMvpMatrix);
+
+    // Obtém a direção da câmera
+    var viewDirection = new Vector3([0.0, 0.0, -1.0]); // Exemplo: câmera olhando para o cubo
+
+    // Calcula o produto escalar entre o vetor normal e a direção da câmera
+    var dotProduct = normal.dot(viewDirection);
+
+    // Determina qual face está virada para o usuário
+    if (dotProduct > 0.0) {
+        console.log('A face está virada para o usuário.');
+    } else {
+        console.log('A face está de costas para o usuário.');
+    }
+    return alert("deu");
 }
+
 
 function loadTexture(gl, url) {
     const texture = gl.createTexture();
