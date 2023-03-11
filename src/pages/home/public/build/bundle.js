@@ -1,7 +1,27 @@
 
 (function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
-var app = (function () {
+var app = (function (THREE) {
     'use strict';
+
+    function _interopNamespace(e) {
+        if (e && e.__esModule) return e;
+        var n = Object.create(null);
+        if (e) {
+            Object.keys(e).forEach(function (k) {
+                if (k !== 'default') {
+                    var d = Object.getOwnPropertyDescriptor(e, k);
+                    Object.defineProperty(n, k, d.get ? d : {
+                        enumerable: true,
+                        get: function () { return e[k]; }
+                    });
+                }
+            });
+        }
+        n["default"] = e;
+        return Object.freeze(n);
+    }
+
+    var THREE__namespace = /*#__PURE__*/_interopNamespace(THREE);
 
     function noop() { }
     function add_location(element, file, line, column, char) {
@@ -26,9 +46,6 @@ var app = (function () {
     }
     function is_empty(obj) {
         return Object.keys(obj).length === 0;
-    }
-    function append(target, node) {
-        target.appendChild(node);
     }
     function insert(target, node, anchor) {
         target.insertBefore(node, anchor || null);
@@ -298,10 +315,6 @@ var app = (function () {
     function dispatch_dev(type, detail) {
         document.dispatchEvent(custom_event(type, Object.assign({ version: '3.55.1' }, detail), { bubbles: true }));
     }
-    function append_dev(target, node) {
-        dispatch_dev('SvelteDOMInsert', { target, node });
-        append(target, node);
-    }
     function insert_dev(target, node, anchor) {
         dispatch_dev('SvelteDOMInsert', { target, node, anchor });
         insert(target, node, anchor);
@@ -481,26 +494,18 @@ var app = (function () {
 
     function create_fragment(ctx) {
     	let main;
-    	let canvas;
 
     	const block = {
     		c: function create() {
     			main = element("main");
-    			canvas = element("canvas");
-    			attr_dev(canvas, "id", "cnv");
-    			attr_dev(canvas, "class", "given");
-    			attr_dev(canvas, "width", "1000");
-    			attr_dev(canvas, "height", "700");
-    			add_location(canvas, file, 7, 2, 83);
-    			attr_dev(main, "class", "svelte-jopgbd");
-    			add_location(main, file, 6, 0, 74);
+    			attr_dev(main, "class", "svelte-m1k99e");
+    			add_location(main, file, 8, 0, 148);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, main, anchor);
-    			append_dev(main, canvas);
     		},
     		p: noop,
     		i: noop,
@@ -542,7 +547,7 @@ var app = (function () {
     		if ('user' in $$props) $$invalidate(0, user = $$props.user);
     	};
 
-    	$$self.$capture_state = () => ({ Cookies: api, user });
+    	$$self.$capture_state = () => ({ Cookies: api, user, THREE: THREE__namespace });
 
     	$$self.$inject_state = $$props => {
     		if ('user' in $$props) $$invalidate(0, user = $$props.user);
@@ -586,5 +591,5 @@ var app = (function () {
 
     return app;
 
-})();
+})(THREE);
 //# sourceMappingURL=bundle.js.map

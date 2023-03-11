@@ -2,10 +2,11 @@
 	import Cookies  from "js-cookie";
 	export let user;
 
+	import * as THREE from 'https://unpkg.com/three/build/three.module.js';
+
 </script>
 
 <main>
-		<canvas id="cnv" class="given" width="1000" height="700"></canvas>
 </main>
 
 <style>
@@ -16,7 +17,7 @@
 		width: 100%;
 		height: 100%;
 	}
-
+	
 	@media (min-width: 640px) {
 		main {
 			max-width: none;
