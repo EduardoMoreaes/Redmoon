@@ -1,27 +1,7 @@
 
 (function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
-var app = (function (THREE) {
+var app = (function () {
     'use strict';
-
-    function _interopNamespace(e) {
-        if (e && e.__esModule) return e;
-        var n = Object.create(null);
-        if (e) {
-            Object.keys(e).forEach(function (k) {
-                if (k !== 'default') {
-                    var d = Object.getOwnPropertyDescriptor(e, k);
-                    Object.defineProperty(n, k, d.get ? d : {
-                        enumerable: true,
-                        get: function () { return e[k]; }
-                    });
-                }
-            });
-        }
-        n["default"] = e;
-        return Object.freeze(n);
-    }
-
-    var THREE__namespace = /*#__PURE__*/_interopNamespace(THREE);
 
     function noop() { }
     function add_location(element, file, line, column, char) {
@@ -47,6 +27,9 @@ var app = (function (THREE) {
     function is_empty(obj) {
         return Object.keys(obj).length === 0;
     }
+    function append(target, node) {
+        target.appendChild(node);
+    }
     function insert(target, node, anchor) {
         target.insertBefore(node, anchor || null);
     }
@@ -57,6 +40,12 @@ var app = (function (THREE) {
     }
     function element(name) {
         return document.createElement(name);
+    }
+    function text(data) {
+        return document.createTextNode(data);
+    }
+    function space() {
+        return text(' ');
     }
     function attr(node, attribute, value) {
         if (value == null)
@@ -315,6 +304,10 @@ var app = (function (THREE) {
     function dispatch_dev(type, detail) {
         document.dispatchEvent(custom_event(type, Object.assign({ version: '3.55.1' }, detail), { bubbles: true }));
     }
+    function append_dev(target, node) {
+        dispatch_dev('SvelteDOMInsert', { target, node });
+        append(target, node);
+    }
     function insert_dev(target, node, anchor) {
         dispatch_dev('SvelteDOMInsert', { target, node, anchor });
         insert(target, node, anchor);
@@ -494,18 +487,99 @@ var app = (function (THREE) {
 
     function create_fragment(ctx) {
     	let main;
+    	let div2;
+    	let div0;
+    	let p0;
+    	let t1;
+    	let input0;
+    	let t2;
+    	let br;
+    	let t3;
+    	let p1;
+    	let t5;
+    	let input1;
+    	let t6;
+    	let div1;
+    	let p2;
+    	let t8;
+    	let p3;
+    	let t10;
+    	let p4;
 
     	const block = {
     		c: function create() {
     			main = element("main");
-    			attr_dev(main, "class", "svelte-m1k99e");
-    			add_location(main, file, 8, 0, 148);
+    			div2 = element("div");
+    			div0 = element("div");
+    			p0 = element("p");
+    			p0.textContent = "Email:";
+    			t1 = space();
+    			input0 = element("input");
+    			t2 = space();
+    			br = element("br");
+    			t3 = space();
+    			p1 = element("p");
+    			p1.textContent = "Password";
+    			t5 = space();
+    			input1 = element("input");
+    			t6 = space();
+    			div1 = element("div");
+    			p2 = element("p");
+    			p2.textContent = "esqueci minha senha";
+    			t8 = space();
+    			p3 = element("p");
+    			p3.textContent = "cadastrar";
+    			t10 = space();
+    			p4 = element("p");
+    			p4.textContent = "entrar";
+    			add_location(p0, file, 9, 3, 134);
+    			attr_dev(input0, "type", "email");
+    			attr_dev(input0, "name", "email");
+    			attr_dev(input0, "placeholder", "exemple@gmail.com");
+    			add_location(input0, file, 10, 3, 151);
+    			add_location(br, file, 10, 69, 217);
+    			add_location(p1, file, 11, 3, 225);
+    			attr_dev(input1, "type", "password");
+    			attr_dev(input1, "name", "password");
+    			attr_dev(input1, "id", "passwordID");
+    			attr_dev(input1, "placeholder", "********");
+    			add_location(input1, file, 12, 3, 244);
+    			attr_dev(div0, "id", "information");
+    			attr_dev(div0, "class", "information");
+    			add_location(div0, file, 8, 2, 88);
+    			add_location(p2, file, 15, 3, 359);
+    			add_location(p3, file, 16, 3, 389);
+    			add_location(p4, file, 17, 3, 409);
+    			attr_dev(div1, "class", "options");
+    			add_location(div1, file, 14, 2, 334);
+    			attr_dev(div2, "class", "login svelte-r5xesw");
+    			add_location(div2, file, 7, 1, 66);
+    			attr_dev(main, "class", "svelte-r5xesw");
+    			add_location(main, file, 5, 0, 57);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, main, anchor);
+    			append_dev(main, div2);
+    			append_dev(div2, div0);
+    			append_dev(div0, p0);
+    			append_dev(div0, t1);
+    			append_dev(div0, input0);
+    			append_dev(div0, t2);
+    			append_dev(div0, br);
+    			append_dev(div0, t3);
+    			append_dev(div0, p1);
+    			append_dev(div0, t5);
+    			append_dev(div0, input1);
+    			append_dev(div2, t6);
+    			append_dev(div2, div1);
+    			append_dev(div1, p2);
+    			append_dev(div1, t8);
+    			append_dev(div1, p3);
+    			append_dev(div1, t10);
+    			append_dev(div1, p4);
     		},
     		p: noop,
     		i: noop,
@@ -529,41 +603,20 @@ var app = (function (THREE) {
     function instance($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('App', slots, []);
-    	let { user } = $$props;
-
-    	$$self.$$.on_mount.push(function () {
-    		if (user === undefined && !('user' in $$props || $$self.$$.bound[$$self.$$.props['user']])) {
-    			console.warn("<App> was created without expected prop 'user'");
-    		}
-    	});
-
-    	const writable_props = ['user'];
+    	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<App> was created with unknown prop '${key}'`);
     	});
 
-    	$$self.$$set = $$props => {
-    		if ('user' in $$props) $$invalidate(0, user = $$props.user);
-    	};
-
-    	$$self.$capture_state = () => ({ Cookies: api, user, THREE: THREE__namespace });
-
-    	$$self.$inject_state = $$props => {
-    		if ('user' in $$props) $$invalidate(0, user = $$props.user);
-    	};
-
-    	if ($$props && "$$inject" in $$props) {
-    		$$self.$inject_state($$props.$$inject);
-    	}
-
-    	return [user];
+    	$$self.$capture_state = () => ({ Cookies: api });
+    	return [];
     }
 
     class App extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init$1(this, options, instance, create_fragment, safe_not_equal, { user: 0 });
+    		init$1(this, options, instance, create_fragment, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -571,14 +624,6 @@ var app = (function (THREE) {
     			options,
     			id: create_fragment.name
     		});
-    	}
-
-    	get user() {
-    		throw new Error("<App>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	set user(value) {
-    		throw new Error("<App>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
 
@@ -591,5 +636,5 @@ var app = (function (THREE) {
 
     return app;
 
-})(THREE);
+})();
 //# sourceMappingURL=bundle.js.map

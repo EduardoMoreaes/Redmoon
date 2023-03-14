@@ -1,12 +1,24 @@
 <script>
 	import Cookies  from "js-cookie";
-	export let user;
-
-	import * as THREE from 'https://unpkg.com/three/build/three.module.js';
-
+	
 </script>
 
 <main>
+
+	<div class="login">
+		<div id="information" class="information">
+			<p>Email:</p>
+			<input type="email" name="email" placeholder="exemple@gmail.com"> <br>
+			<p>Password</p>
+			<input type="password" name="password" id="passwordID" placeholder="********">
+		</div>
+		<div class="options">
+			<p>esqueci minha senha</p>
+			<p>cadastrar</p>
+			<p>entrar</p>
+		</div>
+	</div>
+
 </main>
 
 <style>
@@ -17,7 +29,13 @@
 		width: 100%;
 		height: 100%;
 	}
+
 	
+	.login{
+		text-align: left;
+		width: 20em;
+		height: 25em;
+	}
 	@media (min-width: 640px) {
 		main {
 			max-width: none;

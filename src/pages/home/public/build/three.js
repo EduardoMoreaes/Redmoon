@@ -7,18 +7,21 @@ if(!WebGL.isWebGLAvailable()){
 } 
 
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer({ alpha: true });
 
-renderer.setSize(window.innerWidth, window.innerHeight);
+var width = 450;
+var height = 325;
+
+renderer.setSize(width, height);
 document.body.appendChild(renderer.domElement);
 
-const textureFront = new THREE.TextureLoader().load("../Images/black.jpg");
-const textureBack = new THREE.TextureLoader().load("../Images/white.jpg");
-const textureTop = new THREE.TextureLoader().load("../Images/red.jpg");
-const textureBottom = new THREE.TextureLoader().load("../Images/purple.jpg");
-const textureLeft = new THREE.TextureLoader().load("../Images/green.jpg");
-const textureRight = new THREE.TextureLoader().load("../Images/blue.jpg");
+const textureFront = new THREE.TextureLoader().load("../Images/given/black.jpg");
+const textureBack = new THREE.TextureLoader().load("../Images/given/white.jpg");
+const textureTop = new THREE.TextureLoader().load("../Images/given/red.jpg");
+const textureBottom = new THREE.TextureLoader().load("../Images/given/purple.jpg");
+const textureLeft = new THREE.TextureLoader().load("../Images/given/green.jpg");
+const textureRight = new THREE.TextureLoader().load("../Images/given/blue.jpg");
 
 const materialFront = new THREE.MeshBasicMaterial({map: textureFront});
 const materialBack = new THREE.MeshBasicMaterial({map: textureBack});
@@ -48,6 +51,7 @@ function onMouseMove(event) {
   // transforma as coordenadas do mouse em coordenadas no intervalo [-1, 1]
   mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
   mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+
 }
 
 function render() {
@@ -57,8 +61,6 @@ function render() {
 
   if (intersects.length > 0) {
     const faceIndex = intersects[0].faceIndex;
-
-    alert(faceIndex);
   }
 
   requestAnimationFrame(render);
@@ -125,7 +127,7 @@ function givenUp(e) {
 }
 
 function minimize(){
-    if( window.innerWidth <= 750){
+    if( width <= 300){
         clickes = 0;
         render();
 
@@ -133,9 +135,9 @@ function minimize(){
     } else{
         requestAnimationFrame(minimize);
 
-        window.innerWidth -= 2;
-        window.innerHeight -= 1;
+        width -= 2;
+        height -= 2;
 
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setSize(width, height);
     }
 }
