@@ -1,7 +1,25 @@
 <script>
-	import Cookies  from "js-cookie";
 	
 </script>
+
+<style>
+	main {
+		text-align: center;
+		padding: 0px;
+		margin: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	.login{
+	}
+	@media (min-width: 640px) {
+		main {
+			max-width: none;
+		}
+	}
+
+</style>
 
 <main>
 
@@ -21,25 +39,4 @@
 
 </main>
 
-<style>
-	main {
-		text-align: center;
-		padding: 0px;
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
 
-	
-	.login{
-		text-align: left;
-		width: 20em;
-		height: 25em;
-	}
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
-
-</style>

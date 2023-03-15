@@ -1,0 +1,8 @@
+body{
+    animation: transition 2s forwards;
+}
+@keyframes transition {
+    100%{
+        background-color: black;
+    }
+}

@@ -1,5 +1,6 @@
 import * as THREE from 'https://unpkg.com/three/build/three.module.js';
 import WebGL from './webgl.js';
+import templateSelector from './templateSelector.js';
 
 if(!WebGL.isWebGLAvailable()){ 
     const warning = WebGLErrorMessage();
@@ -10,10 +11,7 @@ const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer({ alpha: true });
 
-var width = 450;
-var height = 325;
-
-renderer.setSize(width, height);
+renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 const textureFront = new THREE.TextureLoader().load("../Images/given/black.jpg");
@@ -30,12 +28,15 @@ const materialBottom = new THREE.MeshBasicMaterial({map: textureBottom});
 const materialLeft = new THREE.MeshBasicMaterial({map: textureLeft});
 const materialRight = new THREE.MeshBasicMaterial({map: textureRight});
 
+var gx = 1.5, gy = 1.5, gz = 1.5;
 
-const geometry = new THREE.BoxGeometry(2, 2, 2);
+const geometry = new THREE.BoxGeometry(gx, gy, gz);
 
 const materials = [materialRight, materialLeft, materialTop, materialBottom, materialFront, materialBack];
 
 const cube = new THREE.Mesh(geometry, materials);
+
+var px = 0, py = 0, pz =0;
 
 scene.add(cube);
 
@@ -44,30 +45,55 @@ camera.position.z = 5;
 cube.rotation.x = 1;
 cube.rotation.y = 0.8;
 
+
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
-function onMouseMove(event) {
-  // transforma as coordenadas do mouse em coordenadas no intervalo [-1, 1]
-  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-  mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+function onMouseEnter(event) {
 
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+
+   
 }
 
-function render() {
+
+
+function render(cube) {
+
+    window.addEventListener("mouseenter", onMouseEnter, false)
+
   raycaster.setFromCamera(mouse, camera);
 
-  const intersects = raycaster.intersectObjects(scene.children);
+  const intersects = raycaster.intersectObjects([cube]);
 
-  if (intersects.length > 0) {
-    const faceIndex = intersects[0].faceIndex;
-  }
-
-  requestAnimationFrame(render);
-  renderer.render(scene, camera);
+  const cameraDirection = new THREE.Vector3();
+    camera.getWorldDirection(cameraDirection);
+    
+    let closestIntersection = null;
+    let closestDistance = Infinity;
+    
+    intersects.forEach(intersect => {
+      const faceNormal = intersect.face.normal.clone().applyQuaternion(intersect.object.quaternion);
+    
+      const distance = cameraDirection.dot(faceNormal);
+    
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closestIntersection = intersect;
+      }
+    });
+    
+    if (closestIntersection) {
+      const closestFaceIndex = closestIntersection.faceIndex;
+      templateSelector(closestFaceIndex);
+      minimize()
+      return 0;
+    }
+    requestAnimationFrame(render);
 }
 
-window.addEventListener('mouseenter', onMouseMove, false);
+
 
 renderer.render(scene, camera);
 
@@ -80,7 +106,7 @@ function animate(){
     cube.rotation.y +=  velocity + 0.2;
 
     if (cube.rotation.x >= numRotate || cube.rotation.y >= numRotate) {        
-        minimize();
+        render(cube)
         return 0;
     }
     else{
@@ -104,8 +130,21 @@ function animateInitial(){
     }
 }
 
-window.addEventListener("mouseup", givenUp);
-window.addEventListener("keydown", givenUp);
+document.addEventListener('mousedown', onMouseDown, false);
+
+function onMouseDown(event) {
+  const mouse = new THREE.Vector2();
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+  raycaster.setFromCamera(mouse, camera);
+
+  const intersects = raycaster.intersectObjects([cube]);
+
+  if (intersects.length > 0) {
+    givenUp();
+  }
+}
 
 var clickes = 0;
 function givenUp(e) {
@@ -127,17 +166,19 @@ function givenUp(e) {
 }
 
 function minimize(){
-    if( width <= 300){
+    if( window.innerHeight <= 300){
         clickes = 0;
-        render();
-
+        animateInitial()
         return 0;
+
     } else{
+
+        window.innerWidth -= 2;
+        window.innerHeight -= 1;
+
+        renderer.setSize(window.innerWidth, window.innerHeight)
+        renderer.render(scene, camera);
+
         requestAnimationFrame(minimize);
-
-        width -= 2;
-        height -= 2;
-
-        renderer.setSize(width, height);
     }
 }
