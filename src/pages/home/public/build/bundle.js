@@ -1,5 +1,5 @@
 
-(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
+(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35730/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
 var app = (function () {
     'use strict';
 
@@ -24,6 +24,14 @@ var app = (function () {
     function safe_not_equal(a, b) {
         return a != a ? b == b : a !== b || ((a && typeof a === 'object') || typeof a === 'function');
     }
+    let src_url_equal_anchor;
+    function src_url_equal(element_src, url) {
+        if (!src_url_equal_anchor) {
+            src_url_equal_anchor = document.createElement('a');
+        }
+        src_url_equal_anchor.href = url;
+        return element_src === src_url_equal_anchor.href;
+    }
     function is_empty(obj) {
         return Object.keys(obj).length === 0;
     }
@@ -46,6 +54,10 @@ var app = (function () {
     }
     function space() {
         return text(' ');
+    }
+    function listen(node, event, handler, options) {
+        node.addEventListener(event, handler, options);
+        return () => node.removeEventListener(event, handler, options);
     }
     function attr(node, attribute, value) {
         if (value == null)
@@ -316,6 +328,19 @@ var app = (function () {
         dispatch_dev('SvelteDOMRemove', { node });
         detach(node);
     }
+    function listen_dev(node, event, handler, options, has_prevent_default, has_stop_propagation) {
+        const modifiers = options === true ? ['capture'] : options ? Array.from(Object.keys(options)) : [];
+        if (has_prevent_default)
+            modifiers.push('preventDefault');
+        if (has_stop_propagation)
+            modifiers.push('stopPropagation');
+        dispatch_dev('SvelteDOMAddEventListener', { node, event, handler, modifiers });
+        const dispose = listen(node, event, handler, options);
+        return () => {
+            dispatch_dev('SvelteDOMRemoveEventListener', { node, event, handler, modifiers });
+            dispose();
+        };
+    }
     function attr_dev(node, attribute, value) {
         attr(node, attribute, value);
         if (value == null)
@@ -356,105 +381,156 @@ var app = (function () {
 
     function create_fragment(ctx) {
     	let main;
-    	let div2;
+    	let div6;
     	let div0;
-    	let p0;
+    	let h3;
     	let t1;
-    	let input0;
+    	let div3;
+    	let div1;
+    	let img0;
+    	let img0_src_value;
     	let t2;
-    	let br;
+    	let input0;
     	let t3;
-    	let p1;
+    	let br;
+    	let t4;
+    	let div2;
+    	let img1;
+    	let img1_src_value;
     	let t5;
     	let input1;
     	let t6;
-    	let div1;
-    	let p2;
+    	let div5;
+    	let a;
     	let t8;
-    	let p3;
+    	let div4;
+    	let button0;
     	let t10;
-    	let p4;
+    	let button1;
+    	let mounted;
+    	let dispose;
 
     	const block = {
     		c: function create() {
     			main = element("main");
-    			div2 = element("div");
+    			div6 = element("div");
     			div0 = element("div");
-    			p0 = element("p");
-    			p0.textContent = "Email:";
+    			h3 = element("h3");
+    			h3.textContent = "LOG IN";
     			t1 = space();
-    			input0 = element("input");
+    			div3 = element("div");
+    			div1 = element("div");
+    			img0 = element("img");
     			t2 = space();
-    			br = element("br");
+    			input0 = element("input");
     			t3 = space();
-    			p1 = element("p");
-    			p1.textContent = "Password";
+    			br = element("br");
+    			t4 = space();
+    			div2 = element("div");
+    			img1 = element("img");
     			t5 = space();
     			input1 = element("input");
     			t6 = space();
-    			div1 = element("div");
-    			p2 = element("p");
-    			p2.textContent = "esqueci minha senha";
+    			div5 = element("div");
+    			a = element("a");
+    			a.textContent = "forgot password";
     			t8 = space();
-    			p3 = element("p");
-    			p3.textContent = "cadastrar";
+    			div4 = element("div");
+    			button0 = element("button");
+    			button0.textContent = "Log up";
     			t10 = space();
-    			p4 = element("p");
-    			p4.textContent = "entrar";
-    			add_location(p0, file, 27, 3, 289);
-    			attr_dev(input0, "type", "email");
-    			attr_dev(input0, "name", "email");
-    			attr_dev(input0, "placeholder", "exemple@gmail.com");
-    			add_location(input0, file, 28, 3, 306);
-    			add_location(br, file, 28, 69, 372);
-    			add_location(p1, file, 29, 3, 380);
+    			button1 = element("button");
+    			button1.textContent = "Log in";
+    			add_location(h3, file, 105, 4, 2188);
+    			attr_dev(div0, "class", "title svelte-isz3le");
+    			add_location(div0, file, 104, 3, 2164);
+    			attr_dev(img0, "class", "title-input svelte-isz3le");
+    			if (!src_url_equal(img0.src, img0_src_value = "../Images/icons/userName3.png")) attr_dev(img0, "src", img0_src_value);
+    			attr_dev(img0, "alt", "");
+    			add_location(img0, file, 109, 5, 2289);
+    			attr_dev(input0, "class", "input svelte-isz3le");
+    			attr_dev(input0, "type", "text");
+    			attr_dev(input0, "name", "userName");
+    			attr_dev(input0, "placeholder", "username");
+    			add_location(input0, file, 110, 5, 2363);
+    			add_location(br, file, 110, 78, 2436);
+    			attr_dev(div1, "class", "email svelte-isz3le");
+    			add_location(div1, file, 108, 4, 2264);
+    			attr_dev(img1, "class", "title-input svelte-isz3le");
+    			if (!src_url_equal(img1.src, img1_src_value = "../Images/icons/password3.png")) attr_dev(img1, "src", img1_src_value);
+    			attr_dev(img1, "alt", "");
+    			add_location(img1, file, 113, 5, 2484);
+    			attr_dev(input1, "class", "input svelte-isz3le");
     			attr_dev(input1, "type", "password");
     			attr_dev(input1, "name", "password");
     			attr_dev(input1, "id", "passwordID");
-    			attr_dev(input1, "placeholder", "********");
-    			add_location(input1, file, 30, 3, 399);
-    			attr_dev(div0, "id", "information");
-    			attr_dev(div0, "class", "information");
-    			add_location(div0, file, 26, 2, 243);
-    			add_location(p2, file, 33, 3, 514);
-    			add_location(p3, file, 34, 3, 544);
-    			add_location(p4, file, 35, 3, 564);
-    			attr_dev(div1, "class", "options");
-    			add_location(div1, file, 32, 2, 489);
-    			attr_dev(div2, "class", "login svelte-c4dkl8");
-    			add_location(div2, file, 25, 1, 221);
-    			attr_dev(main, "class", "svelte-c4dkl8");
-    			add_location(main, file, 23, 0, 212);
+    			attr_dev(input1, "placeholder", "password");
+    			add_location(input1, file, 114, 5, 2558);
+    			attr_dev(div2, "class", "password svelte-isz3le");
+    			add_location(div2, file, 112, 4, 2456);
+    			attr_dev(div3, "id", "information");
+    			attr_dev(div3, "class", "information");
+    			add_location(div3, file, 107, 3, 2217);
+    			attr_dev(a, "href", "http://");
+    			attr_dev(a, "class", "password-lost svelte-isz3le");
+    			add_location(a, file, 118, 4, 2701);
+    			attr_dev(button0, "class", "logup-button svelte-isz3le");
+    			add_location(button0, file, 120, 20, 2819);
+    			attr_dev(button1, "type", "submit");
+    			attr_dev(button1, "class", "login-button svelte-isz3le");
+    			add_location(button1, file, 121, 20, 2901);
+    			attr_dev(div4, "class", "buttons svelte-isz3le");
+    			add_location(div4, file, 119, 16, 2777);
+    			attr_dev(div5, "class", "options");
+    			add_location(div5, file, 117, 3, 2675);
+    			attr_dev(div6, "class", "login svelte-isz3le");
+    			add_location(div6, file, 103, 2, 2141);
+    			attr_dev(main, "id", "main");
+    			attr_dev(main, "class", "svelte-isz3le");
+    			add_location(main, file, 102, 0, 2122);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, main, anchor);
-    			append_dev(main, div2);
-    			append_dev(div2, div0);
-    			append_dev(div0, p0);
-    			append_dev(div0, t1);
-    			append_dev(div0, input0);
-    			append_dev(div0, t2);
-    			append_dev(div0, br);
-    			append_dev(div0, t3);
-    			append_dev(div0, p1);
-    			append_dev(div0, t5);
-    			append_dev(div0, input1);
-    			append_dev(div2, t6);
-    			append_dev(div2, div1);
-    			append_dev(div1, p2);
-    			append_dev(div1, t8);
-    			append_dev(div1, p3);
-    			append_dev(div1, t10);
-    			append_dev(div1, p4);
+    			append_dev(main, div6);
+    			append_dev(div6, div0);
+    			append_dev(div0, h3);
+    			append_dev(div6, t1);
+    			append_dev(div6, div3);
+    			append_dev(div3, div1);
+    			append_dev(div1, img0);
+    			append_dev(div1, t2);
+    			append_dev(div1, input0);
+    			append_dev(div1, t3);
+    			append_dev(div1, br);
+    			append_dev(div3, t4);
+    			append_dev(div3, div2);
+    			append_dev(div2, img1);
+    			append_dev(div2, t5);
+    			append_dev(div2, input1);
+    			append_dev(div6, t6);
+    			append_dev(div6, div5);
+    			append_dev(div5, a);
+    			append_dev(div5, t8);
+    			append_dev(div5, div4);
+    			append_dev(div4, button0);
+    			append_dev(div4, t10);
+    			append_dev(div4, button1);
+
+    			if (!mounted) {
+    				dispose = listen_dev(button0, "click", logup, false, false, false);
+    				mounted = true;
+    			}
     		},
     		p: noop,
     		i: noop,
     		o: noop,
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(main);
+    			mounted = false;
+    			dispose();
     		}
     	};
 

@@ -85,10 +85,10 @@ function render(cube) {
     });
     
     if (closestIntersection) {
-      const closestFaceIndex = closestIntersection.faceIndex;
-      templateSelector(closestFaceIndex);
-      minimize()
-      return 0;
+        const closestFaceIndex = closestIntersection.faceIndex;
+        templateSelector(closestFaceIndex);
+        minimize()
+        return 0;
     }
     requestAnimationFrame(render);
 }
@@ -173,8 +173,8 @@ function minimize(){
 
     } else{
 
-        window.innerWidth -= 2;
-        window.innerHeight -= 1;
+        window.innerWidth -= 4;
+        window.innerHeight -= 2;
 
         renderer.setSize(window.innerWidth, window.innerHeight)
         renderer.render(scene, camera);
