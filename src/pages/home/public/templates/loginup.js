@@ -2,7 +2,7 @@ function logup(){
     document.getElementById('main').innerHTML = `
     <div class="logup">
         <div class="title">
-            <h3>LOG UP</h3>
+            <h3>LOG IN</h3>
         </div>
         <div id="information" class="information">
             <div class="row">
@@ -27,13 +27,13 @@ function logup(){
             </div>
             <div class="terms">
                     <input class="register-term" id="terms" type="checkbox">
-                    i read and concord with <a href="teste.html">terms of privacy.</a>
+                    i read and concord with <a href="../terms/terms.html" target="_blank">terms of privacy.</a>
             </div>
         </div>
         <div class="options">
             <div class="buttons-up">
-                <button on:click{login} class="login-button-up">Log in</button>
-                <button type="submit" class="logup-button-up">Log up</button>
+                <button onclick="login()" class="login-button-up">Log up</button>
+                <button type="submit" class="logup-button-up">Log in</button>
             </div>
         </div>
     </div>`;       
@@ -41,7 +41,7 @@ function logup(){
 function login() {
     document.getElementById("main").innerHTML = `<div class="login">
     <div class="title">
-        <h3>LOG IN</h3>
+        <h3>LOG UP</h3>
     </div>
     <div id="information" class="information">
         <div class="email">
@@ -54,10 +54,10 @@ function login() {
         </div>
     </div>
     <div class="options">
-        <a href="http://" class="password-lost">forgot password</a>
+        <a href="http://" class="password-lost">forgot password?</a>
         <div class="buttons">
             <button onclick="logup()" class="logup-button">Log up</button>
-            <button type="submit" class="login-button">Log in</button>
+            <button type="submit" class="login-button">Log up</button>
         </div>
     </div>
 </div>`;
