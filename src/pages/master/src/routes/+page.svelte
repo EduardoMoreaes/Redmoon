@@ -80,7 +80,7 @@
         <li>E</li>
         <li>D</li>
         <li>M</li>
-        <li>O</li>
+        <li><img src="../src/images/redmoon.jpg" width="45px" alt=""></li>
         <li>O</li>
         <li>N</li>
     </caption>
@@ -103,11 +103,21 @@
         <td class="col">Init Section</td>
     </tr>
     <tr class="row">
-        <td class="col">
+        <td class="col" colspan="2">
             Monster/NPC
+            <table>
+                <tr>
+                    <td></td>
+                </tr>
+            </table>
         </td>
         <td class="col">
             Mechanics
+            <table>
+                <tr>
+                    <td></td>
+                </tr>
+            </table>
         </td>
     </tr>
 </table>
