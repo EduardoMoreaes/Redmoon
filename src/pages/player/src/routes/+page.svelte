@@ -1,58 +1,5 @@
-<style>
-    .main{
-        width: 100%;
-        height: 100%;
-        border-radius: 2em;
-        flex-direction: row;
-        padding-left: 2em;
-        margin: 0;
-        color: white;
-        justify-content: space-around;
-    }
-    .title-table{
-        border-bottom: 3px solid white;
-        border-radius: 2em;
-        font-family: 'Times New Roman', Times, serif;
-        font-size: 24px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        list-style: none;
-        color: red;
-        background: black;
-    }
-    .container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 20px;
-    }
-    .container > div {
-        flex: 1;
-        margin: 0 10px;
-    }
-    .left, .right , .center{
-        background-color: #333;
-        justify-content: center;
-        height: 40em;
-        font-family: cursive;
-        padding-top: 2em;
-    }
-    .center{
-        display: grid;
-    }
-    .tab-center{
-        width: 25em;
-        height: 15em;
-        background-color: #555;
-        
-    }
-    history{
-        font-size: 40px;
-        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-        background-color: #555;
-    }
-</style>
+<link rel="stylesheet" href="../src/styles/styles.css">
+
 <table class="main" >
     <caption class="title-table">
         <li>R</li>
@@ -62,6 +9,9 @@
         <li><img src="../src/images/redmoon.jpg" width="45px" alt=""></li>
         <li>O</li>
         <li>N</li>
+        <li><button class="exit">
+            <img src="../src/images/log-out.png" class="exit" alt="">
+        </button></li>
     </caption>
 </table>
 <div class="container">
@@ -78,6 +28,20 @@
         </div>
     </div>
     <div class="right">
-        a
+        <div class="op">
+            <button class="options op-select">Select</button>
+            <button class="options op-play">Play</button> 
+            <button class="options op-create">Create+</button>
+        </div>
+        <div class="person">
+            <name>NamePlayer</name>
+            <img class="img-person" src="../src/images/personExemple.jpg" alt="" srcset="">
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <input class="file" type="file" name="profile" id="file">
+                <label for="file" class="file">
+                    <img class="file" src="https://cdn-icons-png.flaticon.com/512/8563/8563502.png" alt="" srcset="">
+                </label>
+            </form>
+        </div>
     </div>
 </div>
